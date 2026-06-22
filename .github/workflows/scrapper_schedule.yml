@@ -1,0 +1,60 @@
+# .github/workflows/scrape.yml
+# ============================================================
+# Automatyczny scraper — uruchamia się 3x dziennie
+# Zapisuje do Supabase (Postgres) przez --prod flag
+# ============================================================
+
+name: Flight Price Scraper
+
+on:
+  schedule:
+    # UTC: 06:00, 12:00, 18:00 = polskie 08:00, 14:00, 20:00 (lato)
+    - cron: "0 6 * * *"
+    - cron: "0 12 * * *"
+    - cron: "0 18 * * *"
+
+  # Możesz też uruchomić ręcznie z panelu GitHub Actions → Run workflow
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Ile dni w przód (domyślnie 90)"
+        required: false
+        default: "90"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15       # zabezpieczenie — job nie będzie wisiał w nieskończoność
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"         # cache zależności między runami — szybciej
+
+      - name: Zainstaluj zależności
+        run: |
+          pip install --upgrade pip
+          # Instalujemy tylko to, czego potrzebuje scraper (nie cały requirements.txt)
+          pip install ryanair-py supabase python-dotenv
+
+      - name: Uruchom scraper (tryb produkcyjny → Supabase)
+        env:
+          # Zmienne z GitHub Secrets (Settings → Secrets and variables → Actions)
+          SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          DAYS=${{ github.event.inputs.days || '90' }}
+          python scraper.py --prod --days $DAYS
+
+      - name: Zapisz logi jako artefakt (do debugowania)
+        if: always()           # zapisz nawet jeśli scraper padnie
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-logs-${{ github.run_id }}
+          retention-days: 7
+          path: "*.log"        # jeśli dodasz FileHandler do loggera w scraper.py
