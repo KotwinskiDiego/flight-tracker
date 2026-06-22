@@ -1,0 +1,22 @@
+# Środowisko
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Lokalna baza danych — nie commituj, to tylko dev
+data/
+*.db
+*.sqlite
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logi
+*.log
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,57 @@
+# ============================================================
+# FLIGHT PRICE TRACKER & PREDICTOR — requirements.txt
+# Python 3.12 | Wrocław → Włochy/Hiszpania
+# ============================================================
+
+# === Podstawy obliczeniowe ===
+numpy>=1.26.0,<2.0.0
+pandas>=2.1.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+statsmodels>=0.14.0
+joblib>=1.3.0
+
+# === Źródło danych — Ryanair  ===
+ryanair-py>=3.0.0           
+
+# === Scraping bezpośredni (Wizzair / backup) ===
+requests>=2.31.0
+httpx>=0.25.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+playwright>=1.40.0          # ZAMIAST selenium — lepszy do JS-heavy stron (Wizzair)
+fake-useragent>=1.4.0
+python-dotenv>=1.0.0
+
+# === Baza danych ===
+supabase>=2.0.0             # Klient Supabase (Postgres w chmurze, darmowy tier)
+psycopg2-binary>=2.9.0      # Fallback — bezpośrednie połączenie z Postgres
+
+
+# === Modele gradient boostingu ===
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# === Backtesting i ewaluacja ===
+backtesting>=0.3.0
+scikit-optimize>=0.9.0
+
+# === Wizualizacja i Dashboard ===
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.17.0
+streamlit>=1.28.0
+
+# === Telegram Bot ===
+python-telegram-bot>=20.0
+
+# === Środowisko developerskie ===
+jupyter>=1.0.0
+ipykernel>=6.25.0
+tqdm>=4.66.0
+
+# === Testowanie i dokumentacja ===
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+mkdocs>=1.5.0
