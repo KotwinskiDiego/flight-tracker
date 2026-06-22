@@ -49,7 +49,7 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           DAYS=${{ github.event.inputs.days || '90' }}
-          python scraper.py --prod --days $DAYS
+          python Scraper.py --prod --days $DAYS
 
       - name: Zapisz logi jako artefakt (do debugowania)
         if: always()           # zapisz nawet jeśli scraper padnie

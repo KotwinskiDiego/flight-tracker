@@ -5,7 +5,7 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Lokalna baza danych — nie commituj, to tylko dev
+# Lokalna baza danych 
 data/
 *.db
 *.sqlite
