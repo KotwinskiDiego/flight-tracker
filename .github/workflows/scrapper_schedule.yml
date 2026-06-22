@@ -19,7 +19,7 @@ on:
       days:
         description: "Ile dni w przód (domyślnie 90)"
         required: false
-        default: "90"
+        default: "14"
 
 jobs:
   scrape:

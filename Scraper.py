@@ -194,8 +194,10 @@ def scrape_return_route(api: Ryanair, destination: str, date_from, date_to, stay
         
         # Log postępu co 10 dni
         days_done = (current_date - date_from).days
+        total_days = (date_to - date_from).days
+        
         if days_done % 10 == 0:
-            log.info(f"Postęp: {days_done}/{DAYS_AHEAD} dni dla {destination}")
+            log.info(f"Postęp: {days_done}/{total_days} dni dla {destination}")
     
     log.info(f"  {ORIGIN}↔{destination}: pobrano {len(rows)} par lotów")
     return rows
