@@ -48,7 +48,7 @@ jobs:
           SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          DAYS=${{ github.event.inputs.days || '90' }}
+          DAYS=${{ github.event.inputs.days || '14' }}
           python Scraper.py --prod --days $DAYS
 
       - name: Zapisz logi jako artefakt (do debugowania)
