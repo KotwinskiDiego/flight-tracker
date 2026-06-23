@@ -49,6 +49,9 @@ DESTINATIONS = [
     "AGP",  # Malaga
     "ALC",  # Alicante
     "PMI",  # Palma de Mallorca
+    "DUB",  # Dublin
+    "ORK",  # Cork
+    "SNN",  # Shannon
 ]
 
 # Długości pobytu do sprawdzenia
