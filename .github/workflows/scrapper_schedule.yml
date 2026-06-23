@@ -40,7 +40,7 @@ jobs:
         run: |
           pip install --upgrade pip
           # Instalujemy tylko to, czego potrzebuje scraper (nie cały requirements.txt)
-          pip install ryanair-py supabase python-dotenv
+          pip install ryanair-py supabase python-dotenv brotli
 
       - name: Uruchom scraper (tryb produkcyjny → Supabase)
         env:
