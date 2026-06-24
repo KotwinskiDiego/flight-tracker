@@ -55,9 +55,9 @@ DESTINATIONS = [
 ]
 
 # Długości pobytu do sprawdzenia
-STAY_LENGTHS = [2, 3, 6, 7, 14]
+STAY_LENGTHS = [2, 3, 4, 5, 6, 7]
 
-DAYS_AHEAD = 14
+DAYS_AHEAD = 30
 
 # Opóźnienia — szanujemy Ryanair, nie spamujemy
 DELAY_BETWEEN_REQUESTS = 0.8   # między zapytaniami w jednej trasie
@@ -434,7 +434,7 @@ def insert_supabase(client, rows: list[dict]) -> int:
         return 0
     result = (
         client.table("round_trips")
-        .upsert(rows, on_conflict="origin,destination,outbound_date,inbound_date,outbound_time,scraped_at")
+        .upsert(rows, on_conflict="origin,destination,outbound_date,inbound_date,outbound_time")
         .execute()
     )
     return len(result.data)
